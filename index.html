@@ -300,8 +300,8 @@ canvas{display:block;max-width:100%;height:auto;cursor:crosshair}
 
     <!-- Save buttons -->
     <div class="btnrow">
-      <button class="btn bp" id="btnPng">⬇حفظ الصوره PNG</button>
-      <button class="btn ba" id="btnJpeg">⬇ حفظ الصوره JPEG</button>
+      <button class="btn bp" id="btnPng">⬇ حفظ الصورة PNG</button>
+      <button class="btn ba" id="btnJpeg">⬇ حفظ الصورة JPEG</button>
     </div>
 
     <!-- Mobile share badge -->
@@ -353,6 +353,7 @@ const T = {
     toastSaved:'✅ Image saved!',
     toastSharing:'📤 Opening share sheet…',
     toastFallback:'⬇ Downloading image…',
+    errNoName:'⚠️ Please enter a name first!',
   },
   ar:{
     title:'محرر الصور – ACCUMED', sub:'عيد مبارك على الجميع وكل عام وانتم بخير',
@@ -370,6 +371,7 @@ const T = {
     toastSaved:'✅ تم حفظ الصورة!',
     toastSharing:'📤 جاري فتح قائمة المشاركة…',
     toastFallback:'⬇ جاري تحميل الصورة…',
+    errNoName:'⚠️ الرجاء كتابة الاسم أولاً!',
   }
 };
 
@@ -625,8 +627,14 @@ function bindEvents() {
   });
 
   // ── Smart Save buttons ──
-  document.getElementById('btnPng').addEventListener('click',  () => { if(S.name.trim()) saveNameToTelegram(S.name); smartSave('png');  });
-  document.getElementById('btnJpeg').addEventListener('click', () => { if(S.name.trim()) saveNameToTelegram(S.name); smartSave('jpeg'); });
+  document.getElementById('btnPng').addEventListener('click', () => {
+    if (!S.name.trim()) { showToast(T[S.lang].errNoName); return; }
+    saveNameToTelegram(S.name); smartSave('png');
+  });
+  document.getElementById('btnJpeg').addEventListener('click', () => {
+    if (!S.name.trim()) { showToast(T[S.lang].errNoName); return; }
+    saveNameToTelegram(S.name); smartSave('jpeg');
+  });
 
   // ── Drag on canvas ──
   cv.addEventListener('mousedown',  startDrag);
