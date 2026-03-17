@@ -434,8 +434,8 @@ const S = {
   lang        : 'en',
   name        : '',
   font        : FONTS[0].val,
-  fontSize    : 40,
-  color       : '#5a7a6a',
+  fontSize    : 100,
+  color       : '#C6D936',
   opacity     : 1,
   align       : 'center',   // left | center | right
   hPct        : 50,         // 0–100 %
@@ -479,7 +479,7 @@ const cbox        = document.getElementById('cbox');
 // ══════════════════════════════════════════════════
 document.addEventListener('DOMContentLoaded', () => {
   buildFontSelect();
-  buildColorPicker('cpMain',   MAIN_COLORS, '#5a7a6a', c => { S.color    = c; draw(); }, true);
+  buildColorPicker('cpMain',   MAIN_COLORS, '#C6D936', c => { S.color    = c; draw(); }, true);
   buildColorPicker('cpOutline',OUT_COLORS,  '#000000', c => { S.outColor = c; draw(); }, false);
   bindEvents();
   loadImage();
